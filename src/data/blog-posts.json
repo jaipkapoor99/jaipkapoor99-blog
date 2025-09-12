@@ -1,10 +1,12 @@
 [
   {
     "slug": "MyPnpmWorkspaceJourney",
-    "title": "Embracing Monorepos with pnpm Workspaces: A Journey Towards Streamlined Development"
+    "title": "Embracing Monorepos with pnpm Workspaces: A Journey Towards Streamlined Development",
+    "date": "2025-09-11"
   },
   {
     "slug": "bit-component-management-analysis",
-    "title": "Bit for Component Management: An Analysis of Benefits and Challenges"
+    "title": "Bit for Component Management: An Analysis of Benefits and Challenges",
+    "date": "2025-09-11"
   }
 ]

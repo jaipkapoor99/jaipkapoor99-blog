@@ -22,9 +22,18 @@ async function generateBlogData() {
         const title = lines[0].replace(/^#+\s*/, "").trim();
         const slug = file.replace(".md", "");
 
+        let date = new Date().toISOString().split('T')[0]; // Default to current date
+        if (lines.length > 1 && lines[1].startsWith("Date:")) {
+          date = lines[1].replace("Date:", "").trim();
+        } else {
+          const stats = await fs.stat(filePath);
+          date = stats.mtime.toISOString().split('T')[0];
+        }
+
         blogPosts.push({
           slug,
           title,
+          date,
         });
       }
     }
