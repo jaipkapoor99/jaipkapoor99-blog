@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { processMarkdown } from "../utils/markdown";
+import BitDevLogo from "../components/BitDevLogo";
 
 interface BlogGeneratorProps {
   slug: string;
@@ -19,7 +20,8 @@ const markdownFiles = import.meta.glob("../blog/*.md", {
   import: "default",
 }) as Record<string, string>;
 
-const imageFiles = import.meta.glob("../blog-images/*.svg", {
+// Resolve image file URLs; we'll convert to base64 data URIs at runtime
+const imageFiles = import.meta.glob("../blog-images/*.{svg,png,jpg,jpeg,webp,avif}", {
   eager: true,
   query: "?url",
   import: "default",
@@ -38,12 +40,62 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
     return entry?.[1] ?? null;
   }, [slug]);
 
-  const imageUrl = useMemo(() => {
-    const entry = Object.entries(imageFiles).find(([path]) =>
-      path.endsWith(`/${slug}.svg`),
-    );
-    return entry?.[1] ?? "";
+  const imageAssetUrl = useMemo(() => {
+    const entries = Object.entries(imageFiles);
+    // 1) Try exact basename match with any extension
+    const exact = entries.find(([path]) => {
+      const file = path.split("/").pop() ?? "";
+      const name = file.replace(/\.[^.]+$/, "");
+      return name === slug;
+    });
+    if (exact) return exact[1];
+
+    // 2) Try token-based match (supports images like PNPM.svg for MyPnpmWorkspaceJourney)
+    const tokens = slug
+      .replace(/([a-z])([A-Z])/g, "$1 $2") // split camelCase
+      .split(/[^a-zA-Z]+/)
+      .map((t) => t.toLowerCase())
+      .filter(Boolean);
+    const tokenMatch = entries.find(([path]) => {
+      const file = path.split("/").pop() ?? "";
+      const name = file.replace(/\.[^.]+$/, "").toLowerCase();
+      return tokens.includes(name);
+    });
+    return tokenMatch?.[1] ?? "";
   }, [slug]);
+
+  const [imageDataUrl, setImageDataUrl] = useState<string>("");
+  const isBitPost = slug === "bit-component-management-analysis";
+
+  useEffect(() => {
+    let cancelled = false;
+    const toDataUrl = async (url: string) => {
+      try {
+        if (!url) {
+          setImageDataUrl("");
+          return;
+        }
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to load image: ${res.status}`);
+        const blob = await res.blob();
+        await new Promise<void>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            if (!cancelled) setImageDataUrl(String(reader.result || ""));
+            resolve();
+          };
+          reader.onerror = () => reject(reader.error);
+          reader.readAsDataURL(blob);
+        });
+      } catch {
+        if (!cancelled) setImageDataUrl("");
+      }
+    };
+    toDataUrl(imageAssetUrl);
+    return () => {
+      cancelled = true;
+    };
+  }, [imageAssetUrl]);
 
   useEffect(() => {
     const loadMarkdown = async () => {
@@ -79,13 +131,17 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
   return (
     <div className="mx-auto p-4 max-w-3xl">
       <h1 className="text-3xl font-bold text-gray-900 mb-4">{blogPost.title}</h1>
-      {imageUrl && (
+      {isBitPost ? (
+        <div className="my-4 flex justify-center">
+          <BitDevLogo />
+        </div>
+      ) : imageDataUrl ? (
         <img
-          src={imageUrl}
+          src={imageDataUrl}
           alt={blogPost.title}
           className="rounded-lg shadow-sm my-4"
         />
-      )}
+      ) : null}
       <p className="text-sm text-gray-500">
         Published: {new Date(blogPost.date).toLocaleDateString()} • Author: {blogPost.author}
       </p>

@@ -19,17 +19,23 @@ const AllBlogPostsPage: React.FC = () => {
         {blogPosts.map((post: BlogPost) => (
           <Card
             key={post.slug}
-            className="bg-white border-gray-200 hover:border-pink-primary/40 hover:bg-gradient-to-br hover:from-pink-50/60 hover:to-white transition-all shadow-sm hover:shadow-md rounded-xl overflow-hidden flex flex-col md:flex-row items-center p-4"
+            className="relative bg-white border-gray-200 hover:border-pink-primary/40 hover:bg-gradient-to-br hover:from-pink-50/60 hover:to-white transition-all shadow-sm hover:shadow-md rounded-xl overflow-hidden flex flex-col md:flex-row items-center p-4"
           >
             <CardHeader className="flex-grow">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">{post.title}</h2>
               <p className="text-sm text-gray-500">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </CardHeader>
-            <CardContent className="flex-shrink-0">
+            <CardContent className="flex-shrink-0 relative z-10">
               <Link to={`/blog/${post.slug}`} className="text-pink-primary font-medium link-underline">
                 Read More
               </Link>
             </CardContent>
+            {/* Stretched link overlay to make entire card clickable */}
+            <Link
+              to={`/blog/${post.slug}`}
+              aria-label={`Open ${post.title}`}
+              className="absolute inset-0"
+            />
           </Card>
         ))}
       </div>

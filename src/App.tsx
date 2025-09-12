@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
         {recentBlogPosts.map((post: BlogPost) => (
           <Card
             key={post.slug}
-            className="bg-white border-gray-200 hover:border-pink-primary/40 hover:shadow-md hover:bg-gradient-to-br hover:from-pink-50/60 hover:to-white transition-all shadow-sm rounded-xl overflow-hidden"
+            className="relative bg-white border-gray-200 hover:border-pink-primary/40 hover:shadow-md hover:bg-gradient-to-br hover:from-pink-50/60 hover:to-white transition-all shadow-sm rounded-xl overflow-hidden"
           >
             <CardHeader>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
@@ -51,11 +51,17 @@ const HomePage: React.FC = () => {
             <CardContent>
               <Link
                 to={`/blog/${post.slug}`}
-                className="text-pink-primary font-medium link-underline"
+                className="text-pink-primary font-medium link-underline relative z-10"
               >
                 Read More
               </Link>
             </CardContent>
+            {/* Stretched link overlay to make entire card clickable */}
+            <Link
+              to={`/blog/${post.slug}`}
+              aria-label={`Open ${post.title}`}
+              className="absolute inset-0"
+            />
           </Card>
         ))}
       </div>

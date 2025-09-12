@@ -141,6 +141,11 @@
   transform: scaleX(1);
 }
 
+/* Navbar link underline slightly transparent */
+.nav-link.link-underline::after {
+  opacity: 0.9;
+}
+
 /* Make links inside blog content styled and animated */
 .blog-content a {
   color: var(--primary);
