@@ -30,9 +30,11 @@ const HomePage: React.FC = () => {
           <h1 className="text-4xl font-bold mb-3 text-gray-900">
             Welcome to My Tech Blog
           </h1>
-          <p className="text-lg text-gray-600">
-            Explore my latest articles
+          <p className="text-lg text-gray-600">Explore my latest articles</p>
+          <p className="text-base text-gray-500">
+            Practical front‑end insights, tools, and monorepo adventures.
           </p>
+          {/* CTA buttons removed per request */}
         </div>
         <div aria-hidden className="absolute -top-24 left-1/2 -translate-x-1/2 w-[640px] h-[320px] bg-pink-200/40 blur-3xl rounded-full" />
       </section>
