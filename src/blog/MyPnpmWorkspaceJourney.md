@@ -1,5 +1,7 @@
 # Embracing Monorepos with pnpm Workspaces: A Journey Towards Streamlined Development
 
+Repo: https://github.com/jaipkapoor99/PNPM-Demo
+
 This document outlines my experience in establishing a monorepository structure utilizing pnpm workspaces. For developers managing interconnected projects, the challenges of maintaining separate repositories can be significant. These often include redundant dependencies across projects, disparate development environments that complicate consistency, and intricate deployment procedures for interdependent components. Monorepos, particularly when integrated with efficient tools like pnpm, offer a compelling solution to these complexities by centralizing development and streamlining workflows.
 
 ## Why pnpm Workspaces?

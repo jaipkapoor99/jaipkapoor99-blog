@@ -71,9 +71,9 @@ const ThemeToggle: React.FC = () => {
     setting === "system" ? (
       <Monitor className="size-5" />
     ) : effectiveTheme === "dark" ? (
-      <Sun className="size-5" />
-    ) : (
       <Moon className="size-5" />
+    ) : (
+      <Sun className="size-5" />
     );
 
   const setAndClose = (s: ThemeSetting) => {
@@ -130,13 +130,13 @@ const ThemeToggle: React.FC = () => {
           <MenuItem
             active={setting === "dark"}
             onClick={() => setAndClose("dark")}
-            icon={<Sun className="size-4" />}
+            icon={<Moon className="size-4" />}
             label="Dark"
           />
           <MenuItem
             active={setting === "light"}
             onClick={() => setAndClose("light")}
-            icon={<Moon className="size-4" />}
+            icon={<Sun className="size-4" />}
             label="Light"
           />
         </div>

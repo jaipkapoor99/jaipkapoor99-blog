@@ -82,17 +82,30 @@ const sanitizeHtml = (html: string): string => {
 export const processMarkdown = async (markdown: string) => {
   const lines = markdown.split("\n");
   const title = lines[0].replace(/^#+\s*/, "").trim(); // First line is the title, remove leading # and spaces
-  // Support optional second-line date prefix: "Date: YYYY-MM-DD"
+  // Optional metadata lines after title: Date: YYYY-MM-DD and Repo: <url>
   let date = new Date().toISOString();
+  let repoUrl: string | undefined;
   let startIndex = 1;
-  if (lines[1] && /^\s*Date:\s*/i.test(lines[1])) {
-    const parsed = lines[1].replace(/^\s*Date:\s*/i, "").trim();
-    // Accept YYYY-MM-DD or ISO strings
-    const d = new Date(parsed);
-    if (!isNaN(d.getTime())) {
-      date = d.toISOString();
+  while (startIndex < lines.length) {
+    const line = lines[startIndex]?.trim() ?? "";
+    if (!line) {
+      startIndex++;
+      continue;
     }
-    startIndex = 2;
+    if (/^Date:\s*/i.test(line)) {
+      const parsed = line.replace(/^Date:\s*/i, "").trim();
+      const d = new Date(parsed);
+      if (!isNaN(d.getTime())) date = d.toISOString();
+      startIndex++;
+      continue;
+    }
+    if (/^(Repo|Repository|Git|GitHub):\s*/i.test(line)) {
+      const parsed = line.replace(/^(Repo|Repository|Git|GitHub):\s*/i, "").trim();
+      if (parsed) repoUrl = parsed;
+      startIndex++;
+      continue;
+    }
+    break; // stop at the first non-metadata line
   }
   const contentWithoutTitle = lines.slice(startIndex).join("\n"); // Rest is content
 
@@ -108,5 +121,6 @@ export const processMarkdown = async (markdown: string) => {
     date,
     author,
     htmlContent: sanitizeHtml(result.toString()),
+    repoUrl,
   };
 };

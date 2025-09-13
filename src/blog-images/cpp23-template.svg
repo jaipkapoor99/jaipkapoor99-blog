@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">C++23 Competitive Programming Template</title>
+  <desc id="desc">Hero illustration for a blog post about a modern C++23 template for competitive programming, highlighting debugging, Unix-like workflow, and testing.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+    </filter>
+    <style>
+      text { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative orbs -->
+  <circle cx="1080" cy="90" r="120" fill="#0ea5e9" opacity="0.15"/>
+  <circle cx="120" cy="540" r="140" fill="#22d3ee" opacity="0.12"/>
+
+  <!-- Title -->
+  <g transform="translate(80,120)">
+    <text x="0" y="0" font-size="56" fill="#e5e7eb" font-weight="800">C++23 Template</text>
+    <text x="0" y="48" font-size="28" fill="#94a3b8">Competitive Programming Workflow</text>
+  </g>
+
+  <!-- Chips -->
+  <g transform="translate(80,210)">
+    <g>
+      <rect x="0" y="-28" rx="12" ry="12" width="160" height="40" fill="#0b1220" stroke="#334155"/>
+      <text x="20" y="-2" font-size="18" fill="#a5b4fc">Unix-like</text>
+    </g>
+    <g transform="translate(180,0)">
+      <rect x="0" y="-28" rx="12" ry="12" width="170" height="40" fill="#0b1220" stroke="#334155"/>
+      <text x="20" y="-2" font-size="18" fill="#86efac">Debug System</text>
+    </g>
+    <g transform="translate(360,0)">
+      <rect x="0" y="-28" rx="12" ry="12" width="160" height="40" fill="#0b1220" stroke="#334155"/>
+      <text x="20" y="-2" font-size="18" fill="#fca5a5">Stress Tests</text>
+    </g>
+  </g>
+
+  <!-- Code panel -->
+  <g transform="translate(80,280)">
+    <rect width="1040" height="280" rx="16" ry="16" fill="#0b1220" stroke="#334155"/>
+    <!-- header -->
+    <g transform="translate(0,0)">
+      <rect width="1040" height="42" rx="16" ry="16" fill="#0f172a"/>
+      <circle cx="24" cy="21" r="6" fill="#ef4444"/>
+      <circle cx="44" cy="21" r="6" fill="#f59e0b"/>
+      <circle cx="64" cy="21" r="6" fill="#22c55e"/>
+      <text x="92" y="28" font-size="16" fill="#64748b" class="mono">main.cpp — C++23</text>
+    </g>
+
+    <!-- code -->
+    <g transform="translate(24,70)">
+      <text class="mono" x="0" y="0" font-size="20" fill="#94a3b8">#include &lt;bits/stdc++.h&gt;</text>
+      <text class="mono" x="0" y="32" font-size="20" fill="#94a3b8">using namespace std;</text>
+      <text class="mono" x="0" y="80" font-size="20" fill="#60a5fa">template</text>
+      <text class="mono" x="120" y="80" font-size="20" fill="#22d3ee">&lt;typename T&gt;</text>
+      <text class="mono" x="0" y="112" font-size="20" fill="#e2e8f0">auto solve(const vector&lt;T&gt;&amp; a)</text>
+      <text class="mono" x="0" y="144" font-size="20" fill="#e2e8f0">-&gt; T {</text>
+      <text class="mono" x="24" y="176" font-size="20" fill="#a7f3d0">// TODO: implement</text>
+      <text class="mono" x="0" y="208" font-size="20" fill="#e2e8f0">}</text>
+
+      <!-- debug badge -->
+      <g transform="translate(680,-10)">
+        <rect width="300" height="42" rx="8" ry="8" fill="rgba(96,165,250,0.1)" stroke="#334155"/>
+        <text class="mono" x="16" y="26" font-size="18" fill="#93c5fd">DEBUG: timer=1.23ms ✓</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Accent underline -->
+  <g transform="translate(80,172)">
+    <rect width="380" height="10" rx="5" fill="url(#accent)" filter="url(#soft)" opacity="0.8"/>
+  </g>
+
+  <!-- Subdecorations: angle brackets and braces -->
+  <g opacity="0.15" fill="none" stroke="#7dd3fc" stroke-width="3">
+    <path d="M1120,380 l-24,-24 l24,-24"/>
+    <path d="M70,150 l-24,-24 l24,-24"/>
+    <path d="M1080,560 c0,-40 60,-40 60,0 c0,40 -60,40 -60,0z"/>
+  </g>
+
+  <!-- Footer tag -->
+  <g transform="translate(80,590)">
+    <text x="0" y="0" font-size="16" fill="#64748b">Modern · Clean · Zero Overhead in Contest Mode</text>
+  </g>
+</svg>
+

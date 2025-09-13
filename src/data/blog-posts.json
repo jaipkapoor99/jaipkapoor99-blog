@@ -2,18 +2,33 @@
   {
     "slug": "MyPnpmWorkspaceJourney",
     "title": "Embracing Monorepos with pnpm Workspaces: A Journey Towards Streamlined Development",
-    "date": "2025-09-11",
-    "tags": ["Component Management", "Monorepo", "pnpm", "Development"]
+    "date": "2025-09-13",
+    "tags": [
+      "Component Management",
+      "Monorepo",
+      "pnpm",
+      "Development"
+    ]
   },
   {
     "slug": "bit-component-management-analysis",
     "title": "Bit for Component Management: An Analysis of Benefits and Challenges",
-    "date": "2025-09-11",
+    "date": "2025-09-13",
     "tags": [
       "Bit",
       "Component Management",
       "Monorepo",
       "React",
+      "Development",
+      "Software Engineering"
+    ]
+  },
+  {
+    "slug": "cpp23-template",
+    "title": "Revolutionize Your Competitive Programming Workflow with the Universal C++23 Template",
+    "date": "2025-09-13",
+    "tags": [
+      "Component Management",
       "Development",
       "Software Engineering"
     ]

@@ -1,5 +1,7 @@
 # Bit for Component Management: An Analysis of Benefits and Challenges
 
+Repo: https://github.com/jaipkapoor99/Bit-Demo
+
 Modern software development frequently encounters challenges related to codebase management, consistency enforcement, and collaborative efficiency. Monolithic architectural patterns, while initially simple, often lead to duplicated efforts, fragmented user experiences, and decelerated development cycles. Bit addresses these challenges by enabling a component-driven development (CDD) paradigm, facilitating the decomposition of applications into independent, versioned, and reusable components. This granular approach offers significant technical and organizational advantages for scaling development.
 
 ## Component Isolation and Collaborative Development

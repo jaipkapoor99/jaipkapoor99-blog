@@ -4,7 +4,7 @@ import { processMarkdown } from "../utils/markdown";
 import BitDevLogo from "../components/BitDevLogo";
 import blogPostsData from "../data/blog-posts.json";
 // Image decoding handled locally per page; no global lazy-loading yet
-import { Calendar, User } from "lucide-react";
+import { Calendar, User, Github, ExternalLink } from "lucide-react";
 
 interface BlogGeneratorProps {
   slug: string;
@@ -16,6 +16,7 @@ interface BlogPostData {
   author: string;
   htmlContent: string;
   tags: string[];
+  repoUrl?: string;
 }
 
 // Map markdown and images at build time for reliable prod paths
@@ -192,6 +193,28 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
           <User className="size-3.5 text-pink-primary" />
           {blogPost.author}
         </Link>
+        {blogPost.repoUrl && (
+          <>
+            {/* Responsive separator: dot on mobile, thin divider on larger screens */}
+            <span aria-hidden className="mx-1 text-pink-primary sm:hidden">•</span>
+            <span
+              aria-hidden
+              className="hidden sm:inline-block h-4 w-px bg-pink-primary/50 mx-1 align-middle"
+            />
+          </>
+        )}
+        {blogPost.repoUrl && (
+          <a
+            href={blogPost.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-pink-primary/30 bg-white px-3 py-1 text-xs font-medium text-pink-primary shadow-sm transition-[colors,transform,box-shadow] duration-500 hover:bg-primary hover:text-white hover:border-pink-primary hover:shadow-lg dark:hover:bg-primary dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-accent/40 transform hover:scale-105"
+          >
+            <Github className="size-3.5" />
+            View Repo
+            <ExternalLink className="size-3.5" />
+          </a>
+        )}
       </div>
       {blogPost.tags && blogPost.tags.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
