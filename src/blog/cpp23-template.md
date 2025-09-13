@@ -1,7 +1,5 @@
 # Revolutionize Your Competitive Programming Workflow with the Universal C++23 Template
 
-Repo: https://github.com/jaipkapoor99/CP-Template
-
 ## My Vision: AI and Software Engineering in CP
 
 Beyond just a template, my goal is to bring the power of AI assistance and robust software engineering principles to the competitive programming world. Imagine a future where AI tools can help you quickly scaffold solutions, identify common pitfalls, or even suggest optimal algorithms based on problem constraints. This template is a step towards that vision, emphasizing clean code, modularity, and comprehensive testing – practices that are fundamental to good software engineering.
