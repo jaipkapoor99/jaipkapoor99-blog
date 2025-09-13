@@ -25,12 +25,22 @@ const HomePage: React.FC = () => {
             className="mx-auto mb-6 h-36 w-auto sm:h-48 md:h-64 lg:h-72 xl:h-[24rem] max-h-[35vh]"
           />
           {/* Title text removed; logo already contains the name */}
-          <p className="text-lg text-gray-600">
-            Essays that challenge the default
+          <p className="text-lg sm:text-xl font-semibold text-gray-800">
+            <span className="text-pink-dark">✦</span> Essays that{" "}
+            <span className="mx-1 font-extrabold text-pink-primary">
+              challenge the default
+            </span>
           </p>
-          <p className="text-base text-gray-500">
-            Culture, creativity, work, and tech — unorthodox ideas for curious
-            minds.
+          <p className="text-base sm:text-lg text-gray-700 mt-1">
+            <span className="font-medium">🧠 Culture</span> •
+            <span className="font-medium"> ✍️ Creativity</span> •
+            <span className="font-medium"> ⚙️ Work</span> •
+            <span className="font-medium"> 💡 Tech</span>
+            <span className="mx-1">—</span>
+            <span className="inline-block rounded-md bg-pink-light/70 px-2 py-0.5 text-pink-dark font-semibold">
+              unorthodox ideas
+            </span>
+            for curious minds.
           </p>
         </div>
         <div
@@ -88,7 +98,7 @@ const HomePage: React.FC = () => {
                     <Link
                       to={`/all-posts?tags=${post.tags
                         .map((t) => encodeURIComponent(t))
-                        .join(',')}`}
+                        .join(",")}`}
                       className="inline-flex items-center gap-1.5 rounded-full border border-pink-primary/30 bg-white px-2.5 py-0.5 text-xs font-medium text-pink-primary shadow-sm hover:bg-pink-light/50"
                       aria-label={`Show all tags for ${post.title}`}
                     >
