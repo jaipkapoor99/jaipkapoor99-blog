@@ -18,7 +18,12 @@ const HomePage: React.FC = () => {
     <div className="mx-auto p-4">
       <section className="max-w-6xl mx-auto relative overflow-hidden rounded-2xl border border-pink-primary/20 bg-gradient-to-b from-pink-50 to-transparent p-8 mb-10">
         <div className="relative z-10 text-center">
-          <h1 className="text-4xl font-bold mb-3 text-gray-900">The Subversive Writer</h1>
+          <img
+            src="/logo.png"
+            alt="The Subversive Writer"
+            className="mx-auto mb-6 h-36 w-auto sm:h-48 md:h-64 lg:h-72 xl:h-[24rem] max-h-[35vh]"
+          />
+          {/* Title text removed; logo already contains the name */}
           <p className="text-lg text-gray-600">Essays that challenge the default</p>
           <p className="text-base text-gray-500">Culture, creativity, work, and tech — unorthodox ideas for curious minds.</p>
         </div>
