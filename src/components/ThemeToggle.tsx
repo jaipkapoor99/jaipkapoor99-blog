@@ -8,13 +8,16 @@ type EffectiveTheme = "light" | "dark";
 const getStoredThemeSetting = (): ThemeSetting => {
   if (typeof window === "undefined") return "system";
   const stored = localStorage.getItem("theme");
-  if (stored === "dark" || stored === "light" || stored === "system") return stored as ThemeSetting;
+  if (stored === "dark" || stored === "light" || stored === "system")
+    return stored as ThemeSetting;
   return "system";
 };
 
 const resolveTheme = (setting: ThemeSetting): EffectiveTheme => {
   if (setting === "system") {
-    const prefersDark = typeof window !== "undefined" && window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+    const prefersDark =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-color-scheme: dark)").matches;
     return prefersDark ? "dark" : "light";
   }
   return setting;
@@ -64,20 +67,22 @@ const ThemeToggle: React.FC = () => {
     };
   }, []);
 
-  const icon = setting === "system" ? (
-    <Monitor className="size-5" />
-  ) : effectiveTheme === "dark" ? (
-    <Sun className="size-5" />
-  ) : (
-    <Moon className="size-5" />
-  );
+  const icon =
+    setting === "system" ? (
+      <Monitor className="size-5" />
+    ) : effectiveTheme === "dark" ? (
+      <Sun className="size-5" />
+    ) : (
+      <Moon className="size-5" />
+    );
 
   const setAndClose = (s: ThemeSetting) => {
     setSetting(s);
     setOpen(false);
   };
 
-  const label = setting === "system" ? "System" : setting === "dark" ? "Dark" : "Light";
+  const label =
+    setting === "system" ? "System" : setting === "dark" ? "Dark" : "Light";
 
   const openNow = () => {
     if (hoverTimeout.current) window.clearTimeout(hoverTimeout.current);
@@ -106,7 +111,9 @@ const ThemeToggle: React.FC = () => {
       >
         {icon}
         <span className="hidden sm:inline">Theme</span>
-        <ChevronDown className={`size-4 transition-transform ${open ? "rotate-180" : "rotate-0"}`} />
+        <ChevronDown
+          className={`size-4 transition-transform ${open ? "rotate-180" : "rotate-0"}`}
+        />
       </Button>
       {open && (
         <div
@@ -138,7 +145,17 @@ const ThemeToggle: React.FC = () => {
   );
 };
 
-const MenuItem = ({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) => (
+const MenuItem = ({
+  active,
+  onClick,
+  icon,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+}) => (
   <button
     role="menuitemradio"
     aria-checked={active}

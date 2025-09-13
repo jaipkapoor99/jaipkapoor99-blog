@@ -2,11 +2,14 @@
 // Maps image files and provides a simple resolver used by the homepage cards
 
 // Vite static import map for image files
-const imageFiles = import.meta.glob("../blog-images/*.{svg,png,jpg,jpeg,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const imageFiles = import.meta.glob(
+  "../blog-images/*.{svg,png,jpg,jpeg,webp,avif}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
 export const findImageAssetUrl = (slug: string): string => {
   const entries = Object.entries(imageFiles);

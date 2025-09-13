@@ -3,14 +3,20 @@ import remarkParse from "remark-parse";
 import remarkHtml from "remark-html";
 
 // Map blog image assets to their built URLs (handled by Vite)
-const imageFiles = import.meta.glob("../blog-images/*.{svg,png,jpg,jpeg,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const imageFiles = import.meta.glob(
+  "../blog-images/*.{svg,png,jpg,jpeg,webp,avif}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
 const imageByBasename = new Map<string, string>(
-  Object.entries(imageFiles).map(([path, url]) => [path.split("/").pop() ?? path, url]),
+  Object.entries(imageFiles).map(([path, url]) => [
+    path.split("/").pop() ?? path,
+    url,
+  ]),
 );
 
 const sanitizeHtml = (html: string): string => {
@@ -18,7 +24,11 @@ const sanitizeHtml = (html: string): string => {
   const template = document.createElement("template");
   template.innerHTML = html;
 
-  const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_ELEMENT, null);
+  const walker = document.createTreeWalker(
+    template.content,
+    NodeFilter.SHOW_ELEMENT,
+    null,
+  );
   const toRemove: Element[] = [];
   while (walker.nextNode()) {
     const el = walker.currentNode as Element;
@@ -37,24 +47,30 @@ const sanitizeHtml = (html: string): string => {
       if (name.startsWith("on")) {
         el.removeAttribute(attr.name);
       }
-      if ((name === "href" || name === "src") && value.toLowerCase().startsWith("javascript:")) {
+      if (
+        (name === "href" || name === "src") &&
+        value.toLowerCase().startsWith("javascript:")
+      ) {
         el.removeAttribute(attr.name);
-    }
+      }
 
-    // Rewrite inline markdown <img> sources to point at bundled assets
-    if (el.tagName.toLowerCase() === "img") {
-      const src = (el.getAttribute("src") || "").trim();
-      // Skip absolute, protocol, or data URLs
-      const isAbsolute = /^(?:[a-z]+:)?\/\//i.test(src) || src.startsWith("/") || src.startsWith("data:");
-      if (!isAbsolute && src) {
-        const base = src.split("/").pop() || src;
-        const resolved = imageByBasename.get(base);
-        if (resolved) {
-          el.setAttribute("src", resolved);
+      // Rewrite inline markdown <img> sources to point at bundled assets
+      if (el.tagName.toLowerCase() === "img") {
+        const src = (el.getAttribute("src") || "").trim();
+        // Skip absolute, protocol, or data URLs
+        const isAbsolute =
+          /^(?:[a-z]+:)?\/\//i.test(src) ||
+          src.startsWith("/") ||
+          src.startsWith("data:");
+        if (!isAbsolute && src) {
+          const base = src.split("/").pop() || src;
+          const resolved = imageByBasename.get(base);
+          if (resolved) {
+            el.setAttribute("src", resolved);
+          }
         }
       }
     }
-  }
 
     // Intentionally not forcing lazy/async attributes yet; will add later
   }

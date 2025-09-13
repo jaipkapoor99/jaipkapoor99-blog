@@ -1,5 +1,10 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Github, Linkedin, Mail, XIcon, Instagram } from "lucide-react";
 
@@ -40,14 +45,19 @@ const links: ContactLink[] = [
 const ContactPage: React.FC = () => {
   return (
     <div className="mx-auto p-4 max-w-3xl">
-      <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Contact Me</h1>
+      <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
+        Contact Me
+      </h1>
       <p className="text-center mb-6 text-gray-600">
         I’d love to connect. Choose a platform below:
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {links.map((item) => (
-          <Card key={item.label} className="bg-white border-gray-200 hover:border-pink-primary/40 transition-colors">
+          <Card
+            key={item.label}
+            className="bg-white border-gray-200 hover:border-pink-primary/40 transition-colors"
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-gray-900">
                 {item.icon}
@@ -56,11 +66,7 @@ const ContactPage: React.FC = () => {
             </CardHeader>
             <CardContent>
               <Button asChild variant="default" className="w-full">
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
                   Open {item.label}
                 </a>
               </Button>

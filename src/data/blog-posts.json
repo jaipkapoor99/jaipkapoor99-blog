@@ -3,12 +3,7 @@
     "slug": "MyPnpmWorkspaceJourney",
     "title": "Embracing Monorepos with pnpm Workspaces: A Journey Towards Streamlined Development",
     "date": "2025-09-11",
-    "tags": [
-      "Component Management",
-      "Monorepo",
-      "pnpm",
-      "Development"
-    ]
+    "tags": ["Component Management", "Monorepo", "pnpm", "Development"]
   },
   {
     "slug": "bit-component-management-analysis",

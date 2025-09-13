@@ -26,11 +26,14 @@ const markdownFiles = import.meta.glob("../blog/*.md", {
 }) as Record<string, string>;
 
 // Resolve image file URLs; we'll convert to base64 data URIs at runtime
-const imageFiles = import.meta.glob("../blog-images/*.{svg,png,jpg,jpeg,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const imageFiles = import.meta.glob(
+  "../blog-images/*.{svg,png,jpg,jpeg,webp,avif}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
 const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
   const [blogPost, setBlogPost] = useState<BlogPostData | null>(null);
@@ -39,7 +42,7 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
   // Lazy loading will be applied later; keep content rendering simple for now
 
   const currentBlogPostMetaData = useMemo(() => {
-    return blogPostsData.find(post => post.slug === slug);
+    return blogPostsData.find((post) => post.slug === slug);
   }, [slug]);
 
   // Resolve assets for the given slug
@@ -118,7 +121,9 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
       try {
         setLoading(true);
         if (!markdown || !currentBlogPostMetaData) {
-          throw new Error("Markdown or blog post metadata not found for this slug.");
+          throw new Error(
+            "Markdown or blog post metadata not found for this slug.",
+          );
         }
         const processedData = await processMarkdown(markdown);
         setBlogPost({
@@ -149,7 +154,9 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
 
   return (
     <div className="mx-auto p-4 max-w-3xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">{blogPost.title}</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        {blogPost.title}
+      </h1>
       {isBitPost ? (
         <div className="my-4 flex justify-center">
           <BitDevLogo />
@@ -164,11 +171,20 @@ const BlogGenerator: React.FC<BlogGeneratorProps> = ({ slug }) => {
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-pink-primary/30 bg-pink-light px-3 py-1 text-xs font-medium text-pink-dark shadow-sm transition-colors hover:bg-pink-light/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-accent/40">
           <Calendar className="size-3.5 text-pink-primary" />
-          {new Date(blogPost.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          {new Date(blogPost.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
         </span>
         {/* Responsive separator: dot on mobile, thin divider on larger screens */}
-        <span aria-hidden className="mx-1 text-pink-primary sm:hidden">•</span>
-        <span aria-hidden className="hidden sm:inline-block h-4 w-px bg-pink-primary/50 mx-2 align-middle" />
+        <span aria-hidden className="mx-1 text-pink-primary sm:hidden">
+          •
+        </span>
+        <span
+          aria-hidden
+          className="hidden sm:inline-block h-4 w-px bg-pink-primary/50 mx-2 align-middle"
+        />
         <Link
           to="/contact"
           className="inline-flex items-center gap-1.5 rounded-full border border-pink-primary/30 bg-pink-light px-3 py-1 text-xs font-medium text-pink-dark shadow-sm transition-colors hover:bg-pink-light/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-accent/40"

@@ -24,10 +24,18 @@ const HomePage: React.FC = () => {
             className="mx-auto mb-6 h-36 w-auto sm:h-48 md:h-64 lg:h-72 xl:h-[24rem] max-h-[35vh]"
           />
           {/* Title text removed; logo already contains the name */}
-          <p className="text-lg text-gray-600">Essays that challenge the default</p>
-          <p className="text-base text-gray-500">Culture, creativity, work, and tech — unorthodox ideas for curious minds.</p>
+          <p className="text-lg text-gray-600">
+            Essays that challenge the default
+          </p>
+          <p className="text-base text-gray-500">
+            Culture, creativity, work, and tech — unorthodox ideas for curious
+            minds.
+          </p>
         </div>
-        <div aria-hidden className="absolute -top-24 left-1/2 -translate-x-1/2 w-[640px] h-[320px] bg-pink-200/40 blur-3xl rounded-full" />
+        <div
+          aria-hidden
+          className="absolute -top-24 left-1/2 -translate-x-1/2 w-[640px] h-[320px] bg-pink-200/40 blur-3xl rounded-full"
+        />
       </section>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -50,19 +58,32 @@ const HomePage: React.FC = () => {
               }
               return (
                 <div className="w-full aspect-[16/9] bg-pink-light/40 overflow-hidden rounded-t-xl">
-                  <img src={img} alt={post.title} className="w-full h-full object-contain" />
+                  <img
+                    src={img}
+                    alt={post.title}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               );
             })()}
             <CardHeader>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{post.title}</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                {post.title}
+              </h2>
             </CardHeader>
             <CardContent>
-              <Link to={`/blog/${post.slug}`} className="text-pink-primary font-medium link-underline relative z-10">
+              <Link
+                to={`/blog/${post.slug}`}
+                className="text-pink-primary font-medium link-underline relative z-10"
+              >
                 Read More
               </Link>
             </CardContent>
-            <Link to={`/blog/${post.slug}`} aria-label={`Open ${post.title}`} className="absolute inset-0" />
+            <Link
+              to={`/blog/${post.slug}`}
+              aria-label={`Open ${post.title}`}
+              className="absolute inset-0"
+            />
           </Card>
         ))}
       </div>

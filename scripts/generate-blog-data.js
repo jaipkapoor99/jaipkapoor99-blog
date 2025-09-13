@@ -23,19 +23,19 @@ async function generateBlogData() {
         const title = lines[0].replace(/^#+\s*/, "").trim();
         const slug = file.replace(".md", "");
 
-        let date = new Date().toISOString().split('T')[0]; // Default to current date
+        let date = new Date().toISOString().split("T")[0]; // Default to current date
         if (lines.length > 1 && lines[1].startsWith("Date:")) {
           date = lines[1].replace("Date:", "").trim();
         } else {
           const stats = await fs.stat(filePath);
-          date = stats.mtime.toISOString().split('T')[0];
+          date = stats.mtime.toISOString().split("T")[0];
         }
 
         blogPosts.push({
           slug,
           title,
           date,
-          tags: [] // Initialize with empty tags array
+          tags: [], // Initialize with empty tags array
         });
       }
     }
@@ -47,11 +47,9 @@ async function generateBlogData() {
 
     // Generate tags after initial blog data is created
     await generateBlogTags();
-
   } catch (error) {
     console.error("Error generating blog data:", error);
   }
 }
 
 generateBlogData();
-

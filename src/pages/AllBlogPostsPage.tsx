@@ -31,7 +31,9 @@ const AllBlogPostsPage: React.FC = () => {
   // All unique tags across posts
   const allTags = useMemo<string[]>(() => {
     const s = new Set<string>();
-    (blogPostsData as BlogPost[]).forEach((p) => p.tags?.forEach((t) => s.add(t)));
+    (blogPostsData as BlogPost[]).forEach((p) =>
+      p.tags?.forEach((t) => s.add(t)),
+    );
     return Array.from(s).sort((a, b) => a.localeCompare(b));
   }, []);
 
@@ -60,13 +62,19 @@ const AllBlogPostsPage: React.FC = () => {
     [selectedTags, setSelectedTags],
   );
 
-  const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9\s-]/g, "");
-  const fuzzyTokens = useMemo(() =>
-    norm(qParam)
-      .split(/[,\s]+/)
-      .map((t) => t.trim())
-      .filter(Boolean),
-  [qParam]);
+  const norm = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[^a-z0-9\s-]/g, "");
+  const fuzzyTokens = useMemo(
+    () =>
+      norm(qParam)
+        .split(/[,\s]+/)
+        .map((t) => t.trim())
+        .filter(Boolean),
+    [qParam],
+  );
 
   const blogPosts: BlogPost[] = (blogPostsData as BlogPost[]).filter((p) => {
     // AND filter for explicitly selected tags
@@ -83,9 +91,13 @@ const AllBlogPostsPage: React.FC = () => {
 
   return (
     <div className="mx-auto p-4 max-w-6xl">
-      <h1 className="text-4xl font-bold text-center mb-6 text-gray-900">All Blog Posts</h1>
+      <h1 className="text-4xl font-bold text-center mb-6 text-gray-900">
+        All Blog Posts
+      </h1>
       <div className="mb-6 mx-auto max-w-3xl">
-        <label htmlFor="tag-search" className="sr-only">Search by tags</label>
+        <label htmlFor="tag-search" className="sr-only">
+          Search by tags
+        </label>
         <input
           id="tag-search"
           className="w-full rounded-md border border-pink-primary/30 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-accent/40"
@@ -94,7 +106,8 @@ const AllBlogPostsPage: React.FC = () => {
           onChange={(e) => {
             const next = new URLSearchParams(searchParams);
             const value = e.target.value;
-            if (value) next.set("q", value); else next.delete("q");
+            if (value) next.set("q", value);
+            else next.delete("q");
             setSearchParams(next);
           }}
         />
@@ -136,8 +149,16 @@ const AllBlogPostsPage: React.FC = () => {
             className="relative bg-white border-gray-200 hover:border-pink-primary/40 hover:bg-gradient-to-br hover:from-pink-50/60 hover:to-white transition-all shadow-sm hover:shadow-md rounded-xl overflow-hidden flex flex-col md:flex-row items-center p-4"
           >
             <CardHeader className="flex-grow">
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">{post.title}</h2>
-              <p className="text-sm text-gray-500">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <h2 className="text-xl font-semibold text-gray-900 mb-1">
+                {post.title}
+              </h2>
+              <p className="text-sm text-gray-500">
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                   <button
@@ -152,7 +173,10 @@ const AllBlogPostsPage: React.FC = () => {
               </div>
             </CardHeader>
             <CardContent className="flex-shrink-0 relative z-10">
-              <Link to={`/blog/${post.slug}`} className="text-pink-primary font-medium link-underline">
+              <Link
+                to={`/blog/${post.slug}`}
+                className="text-pink-primary font-medium link-underline"
+              >
                 Read More
               </Link>
             </CardContent>
