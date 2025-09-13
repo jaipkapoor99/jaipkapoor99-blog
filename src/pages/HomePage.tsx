@@ -8,6 +8,7 @@ import { findImageAssetUrl } from "../utils/postAssets";
 interface BlogPost {
   slug: string;
   title: string;
+  tags?: string[];
 }
 
 const HomePage: React.FC = () => {
@@ -72,6 +73,30 @@ const HomePage: React.FC = () => {
               </h2>
             </CardHeader>
             <CardContent>
+              {post.tags && post.tags.length > 0 && (
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {post.tags.slice(0, 3).map((tag) => (
+                    <Link
+                      key={tag}
+                      to={`/all-posts?tag=${encodeURIComponent(tag)}`}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-pink-primary/30 bg-pink-light px-2.5 py-0.5 text-xs font-medium text-pink-dark shadow-sm hover:bg-pink-light/80"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
+                  {post.tags.length > 3 && (
+                    <Link
+                      to={`/all-posts?tags=${post.tags
+                        .map((t) => encodeURIComponent(t))
+                        .join(',')}`}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-pink-primary/30 bg-white px-2.5 py-0.5 text-xs font-medium text-pink-primary shadow-sm hover:bg-pink-light/50"
+                      aria-label={`Show all tags for ${post.title}`}
+                    >
+                      +{post.tags.length - 3} more
+                    </Link>
+                  )}
+                </div>
+              )}
               <Link
                 to={`/blog/${post.slug}`}
                 className="text-pink-primary font-medium link-underline relative z-10"

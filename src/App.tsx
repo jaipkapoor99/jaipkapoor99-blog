@@ -4,6 +4,7 @@ import AllBlogPostsPage from "./pages/AllBlogPostsPage";
 import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import BlogPostPage from "./pages/BlogPostPage";
+import DisclaimerPage from "./pages/DisclaimerPage";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/all-posts" element={<AllBlogPostsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/ai-disclaimer" element={<DisclaimerPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
