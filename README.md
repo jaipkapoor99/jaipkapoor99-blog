@@ -1,8 +1,12 @@
-# Jai Kapoor's Tech Blog
+# The Subversive Writer
 
-This is a tech blog built with React, TypeScript, and Vite.
+A personal essay site built with React, TypeScript, and Vite.
 
-**Disclaimer:** Some content within the blog posts may have been generated or assisted by AI.
+Essays that challenge the default — culture, creativity, work, and tech.
 
-**Project Details:**
-This blog leverages a Markdown to HTML pipeline for content management. Blog posts are written in Markdown and automatically converted to HTML during the build process, ensuring a seamless content delivery.
+Notes
+- Content lives in `src/blog/*.md` (first line is `# Title`, second line may be `Date: YYYY-MM-DD`).
+- Run `npm run generate-blog-data` before builds to refresh `src/data/blog-posts.json`.
+- Development: `npm run dev`. Production preview: `npm run preview` after `npm run build`.
+
+Disclaimer: Some content may be generated or assisted by AI.

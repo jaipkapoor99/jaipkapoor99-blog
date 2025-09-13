@@ -1,10 +1,16 @@
-const BitDevLogo = () => (
+type Props = {
+  className?: string;
+};
+
+const BitDevLogo = ({ className }: Props) => (
   <svg
-    width="180"
-    height="180"
+    className={className}
+    width="100%"
+    height="100%"
     viewBox="0 0 180 180"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid meet"
   >
     <circle cx="90" cy="90" r="90" fill="#2CB67D" />
     <path
@@ -17,4 +23,3 @@ const BitDevLogo = () => (
 );
 
 export default BitDevLogo;
-

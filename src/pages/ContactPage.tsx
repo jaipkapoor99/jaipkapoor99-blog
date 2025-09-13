@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Github, Linkedin, Mail, XIcon } from "lucide-react";
+import { Github, Linkedin, Mail, XIcon, Instagram } from "lucide-react";
 
 type ContactLink = {
   label: string;
@@ -29,6 +29,11 @@ const links: ContactLink[] = [
     label: "Twitter/X",
     href: "https://x.com/jaipkapoor99",
     icon: <XIcon className="size-5" />,
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/thesubversivewriter",
+    icon: <Instagram className="size-5" />,
   },
 ];
 

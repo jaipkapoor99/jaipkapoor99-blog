@@ -1,6 +1,7 @@
 import fs from "fs/promises"; // Use fs.promises for async operations
 import path from "path";
 import { fileURLToPath } from "url"; // To get __dirname in ES modules
+import { generateBlogTags } from "./generate-blog-tags.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +35,7 @@ async function generateBlogData() {
           slug,
           title,
           date,
+          tags: [] // Initialize with empty tags array
         });
       }
     }
@@ -42,9 +44,14 @@ async function generateBlogData() {
     console.log(
       `Generated ${blogPosts.length} blog posts data to ${outputFilePath}`,
     );
+
+    // Generate tags after initial blog data is created
+    await generateBlogTags();
+
   } catch (error) {
     console.error("Error generating blog data:", error);
   }
 }
 
 generateBlogData();
+

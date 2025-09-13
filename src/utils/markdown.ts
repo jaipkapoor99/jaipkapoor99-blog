@@ -2,7 +2,18 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkHtml from "remark-html";
 
-function sanitizeHtml(html: string): string {
+// Map blog image assets to their built URLs (handled by Vite)
+const imageFiles = import.meta.glob("../blog-images/*.{svg,png,jpg,jpeg,webp,avif}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+const imageByBasename = new Map<string, string>(
+  Object.entries(imageFiles).map(([path, url]) => [path.split("/").pop() ?? path, url]),
+);
+
+const sanitizeHtml = (html: string): string => {
   // Minimal sanitizer: remove script/style, event handlers, and javascript: URLs
   const template = document.createElement("template");
   template.innerHTML = html;
@@ -28,15 +39,31 @@ function sanitizeHtml(html: string): string {
       }
       if ((name === "href" || name === "src") && value.toLowerCase().startsWith("javascript:")) {
         el.removeAttribute(attr.name);
+    }
+
+    // Rewrite inline markdown <img> sources to point at bundled assets
+    if (el.tagName.toLowerCase() === "img") {
+      const src = (el.getAttribute("src") || "").trim();
+      // Skip absolute, protocol, or data URLs
+      const isAbsolute = /^(?:[a-z]+:)?\/\//i.test(src) || src.startsWith("/") || src.startsWith("data:");
+      if (!isAbsolute && src) {
+        const base = src.split("/").pop() || src;
+        const resolved = imageByBasename.get(base);
+        if (resolved) {
+          el.setAttribute("src", resolved);
+        }
       }
     }
   }
 
+    // Intentionally not forcing lazy/async attributes yet; will add later
+  }
+
   toRemove.forEach((el) => el.remove());
   return template.innerHTML;
-}
+};
 
-export async function processMarkdown(markdown: string) {
+export const processMarkdown = async (markdown: string) => {
   const lines = markdown.split("\n");
   const title = lines[0].replace(/^#+\s*/, "").trim(); // First line is the title, remove leading # and spaces
   // Support optional second-line date prefix: "Date: YYYY-MM-DD"
@@ -66,4 +93,4 @@ export async function processMarkdown(markdown: string) {
     author,
     htmlContent: sanitizeHtml(result.toString()),
   };
-}
+};

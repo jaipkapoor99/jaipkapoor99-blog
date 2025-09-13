@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
 import ScrollProgress from "./ScrollProgress";
+import { toDataUrl } from "../utils/image";
 
 const Header: React.FC = () => {
   return (
     <header className="w-full fixed top-0 z-50 bg-gradient-to-r from-white via-pink-50 to-white backdrop-blur border-b border-pink-primary/30 shadow-sm relative">
       <div className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
-        <Link to="/">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-700 bg-clip-text text-transparent">
-            Jai Kapoor's Tech Blog
-          </h1>
+        <Link to="/" aria-label="The Subversive Writer" className="flex items-center gap-3">
+          <Logo />
+          <span className="sr-only">The Subversive Writer</span>
         </Link>
         <nav>
           <ul className="flex items-center space-x-2 sm:space-x-4">
@@ -45,3 +45,29 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
+const Logo: React.FC = () => {
+  const [src, setSrc] = React.useState<string>("");
+  React.useEffect(() => {
+    let cancelled = false;
+    const run = async () => {
+      try {
+        const data = await toDataUrl("/logo.png");
+        if (!cancelled) setSrc(data);
+      } catch {
+        if (!cancelled) setSrc("/desktop-computer.svg");
+      }
+    };
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  return (
+    <img
+      src={src || "/logo.png"}
+      alt="The Subversive Writer"
+      className="h-8 sm:h-9 w-auto"
+    />
+  );
+};

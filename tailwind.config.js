@@ -7,10 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'pink-primary': '#FF69B4', // Hot Pink
-        'pink-light': '#FFC0CB',   // Light Pink
-        'pink-dark': '#C71585',    // Medium Violet Red
-        'pink-accent': '#FF1493',  // Deep Pink
+        // Brand palette for "The Subversive Writer"
+        'pink-primary': '#B1125D', // Deep magenta (brand primary)
+        'pink-light': '#F7DCE8',   // Soft rose for subtle backgrounds
+        'pink-dark': '#7A0C40',    // Dark wine for contrast
+        'pink-accent': '#E03A7D',  // Vivid accent for highlights
       },
     },
   },
