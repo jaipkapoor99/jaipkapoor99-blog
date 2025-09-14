@@ -13,14 +13,14 @@ interface BlogPost {
 
 const HomePage: React.FC = () => {
   const blogPosts: BlogPost[] = blogPostsData;
-  const recentBlogPosts = blogPosts.slice(0, 3);
+  const recentBlogPosts = blogPosts.slice(0, 9);
 
   return (
     <div className="mx-auto p-4">
       <section className="max-w-6xl mx-auto relative overflow-hidden rounded-2xl border border-pink-primary/20 bg-gradient-to-b from-pink-50 to-transparent p-8 mb-10">
         <div className="relative z-10 text-center">
           <img
-            src="/logo.png"
+            src="/logo-text.png"
             alt="The Subversive Writer"
             className="mx-auto mb-6 h-36 w-auto sm:h-48 md:h-64 lg:h-72 xl:h-[24rem] max-h-[35vh]"
           />

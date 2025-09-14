@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
 import ScrollProgress from "./ScrollProgress";
 import { toDataUrl } from "../utils/image";
+// No need to inline-load logo; serve SVG directly from /public
 
 const Header: React.FC = () => {
   return (
@@ -66,27 +67,31 @@ const Header: React.FC = () => {
 export default Header;
 
 const Logo: React.FC = () => {
-  const [src, setSrc] = React.useState<string>("");
-  React.useEffect(() => {
+  const [src, setSrc] = useState<string>("/logo.png");
+
+  useEffect(() => {
     let cancelled = false;
-    const run = async () => {
-      try {
-        const data = await toDataUrl("/logo.png");
-        if (!cancelled) setSrc(data);
-      } catch {
-        if (!cancelled) setSrc("/desktop-computer.svg");
-      }
-    };
-    run();
+    // Use the repo's decoder to convert to a data URL
+    toDataUrl("/logo.png")
+      .then((data) => {
+        if (!cancelled && data) setSrc(data);
+      })
+      .catch(() => {
+        // keep fallback src
+      });
     return () => {
       cancelled = true;
     };
   }, []);
+
   return (
     <img
-      src={src || "/logo.png"}
+      src={src}
       alt="The Subversive Writer"
       className="h-8 sm:h-9 w-auto"
+      onError={(e) => {
+        (e.currentTarget as HTMLImageElement).src = "/desktop-computer.svg";
+      }}
     />
   );
 };
